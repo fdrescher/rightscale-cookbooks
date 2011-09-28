@@ -11,6 +11,19 @@
   },
   "version": "0.0.1",
   "attributes": {
+    "name": {
+      "required": "required",
+      "calculated": false,
+      "choice": [
+
+      ],
+      "type": "string",
+      "recipes": [
+        "my-first-cookbook::hello"
+      ],
+      "display_name": "Test value",
+      "description": "Test specifying Input via Chef attribute"
+    }
   },
   "maintainer_email": "YOUR_EMAIL",
   "long_description": "= DESCRIPTION:\n\n= REQUIREMENTS:\n\n= ATTRIBUTES:\n\n= USAGE:\n\n",
@@ -23,6 +36,7 @@
   "dependencies": {
   },
   "recipes": {
+    "my-first-cookbook::hello": "My second recipe, prints Hello NAME to the RightScale dashboard",
     "my-first-cookbook::helloworld": "My first recipe, prints Hello World to the RightScale dashboard"
   },
   "suggestions": {
