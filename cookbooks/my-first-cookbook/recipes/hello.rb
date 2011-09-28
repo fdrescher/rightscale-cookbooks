@@ -1,1 +1,1 @@
-log "Hello #{name}"
+log "Hello #{node[:name]}"
