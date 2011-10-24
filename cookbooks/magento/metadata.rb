@@ -111,3 +111,10 @@ attribute "magento/admin/password",
   :required => false,
   :default => "randomly generated"
 
+#TEST
+attribute "magento/test/test",
+  :display_name => "Test attribute",
+  :description => "Test attribute.",
+  :required => false,
+  :default => "lalala"
+

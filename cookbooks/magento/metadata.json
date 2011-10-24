@@ -123,6 +123,20 @@
       "display_name": "Magento download version",
       "description": "Version of Magento to download from the Magento site."
     },
+    "magento/test/test": {
+      "required": "optional",
+      "calculated": false,
+      "choice": [
+
+      ],
+      "default": "lalala",
+      "type": "string",
+      "recipes": [
+
+      ],
+      "display_name": "Test attribute",
+      "description": "Test attribute."
+    },
     "magento/admin/user": {
       "required": "optional",
       "calculated": false,
