@@ -20,6 +20,9 @@ end
   depends cb
 end
 
+depends "rs_tools"
+depends "rs_utils"
+
 attribute "magento/version",
   :display_name => "Magento download version",
   :description => "Version of Magento to download from the Magento site.",

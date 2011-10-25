@@ -235,7 +235,13 @@
     "openssl": [
 
     ],
+    "rs_tools": [
+
+    ],
     "apache2": [
+
+    ],
+    "rs_utils": [
 
     ]
   },

@@ -8,7 +8,7 @@
   SSLProtocol all
   SSLCipherSuite ALL:!ADH:RC4+RSA:+HIGH:+MEDIUM:+LOW:+SSLv2:+EXP:+eNULL
 <% else %>
-<VirtualHost *:80>
+<VirtualHost *:8000>
   ServerName <%= @params[:server_name] %>
   ServerAlias <% @params[:server_aliases].each do |a| %><%= "#{a}" %> <% end %>
 <% end %>
