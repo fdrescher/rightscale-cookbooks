@@ -1,4 +1,4 @@
-#rs_utils_marker :begin
+rs_utils_marker :begin
 
 if node.has_key?("ec2")
   server_fqdn = node.ec2.public_hostname
@@ -96,17 +96,17 @@ if node[:server_collection]['load_balancer'].empty?
   Chef::Log.warn "No load-balancer found."
 else
   # 
-  next_servers = node[:server_collection]['load_balancer'].to_hash.values.map do |tags|
-    [RightScale::Utils::Helper.get_tag_value('server:public_ip_0', tags), tags]
-  end.to_hash
+#  next_servers = node[:server_collection]['load_balancer'].to_hash.values.map do |tags|
+#    [RightScale::Utils::Helper.get_tag_value('server:public_ip_0', tags), tags]
+#  end.to_hash
 
   # setup create templates
-  next_servers.each do |name, tags|
-    log "====================================================================================================="
-    log name
-    log tags
-    log "====================================================================================================="
-  end
+#  next_servers.each do |name, tags|
+#    log "====================================================================================================="
+#    log name
+#    log tags
+#    log "====================================================================================================="
+#  end
 end
 
 
@@ -155,4 +155,4 @@ template "#{node[:magento][:dir]}/app/etc/local.xml" do
   variables(:database => node[:magento][:db])
 end
 
-#rs_utils_marker :end
+rs_utils_marker :end
