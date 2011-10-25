@@ -1,6 +1,3 @@
-require 'set'
-require "timeout"
-
 rs_utils_marker :begin
 
 if node.has_key?("ec2")
@@ -86,7 +83,7 @@ server_fqdn = "dududu.ec2-50-17-84-33.compute-1.amazonaws.com"
 
 r = rs_utils_server_collection 'load_balancer' do
   tags [
-    "loadbalancer:app=#{node[:lb_haproxy][:applistener_name]}",
+    "loadbalancer:lb=mylistener",
     "loadbalancer:role=master"
   ]
   secondary_tags "server:public_ip_0=*"
@@ -99,17 +96,17 @@ if node[:server_collection]['load_balancer'].empty?
   Chef::Log.warn "No load-balancer found."
 else
   # 
-#  next_servers = node[:server_collection]['load_balancer'].to_hash.values.map do |tags|
-#    [RightScale::Utils::Helper.get_tag_value('server:public_ip_0', tags), tags]
-#  end.to_hash
+  next_servers = node[:server_collection]['load_balancer'].to_hash.values.map do |tags|
+    [RightScale::Utils::Helper.get_tag_value('server:public_ip_0', tags), tags]
+  end.to_hash
 
   # setup create templates
-#  next_servers.each do |name, tags|
-#    log "====================================================================================================="
-#    log name
-#    log tags
-#    log "====================================================================================================="
-#  end
+  next_servers.each do |name, tags|
+    log "====================================================================================================="
+    log name
+    log tags
+    log "====================================================================================================="
+  end
 end
 
 
