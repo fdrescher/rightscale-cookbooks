@@ -1,3 +1,6 @@
+require 'set'
+require "timeout"
+
 rs_utils_marker :begin
 
 if node.has_key?("ec2")
