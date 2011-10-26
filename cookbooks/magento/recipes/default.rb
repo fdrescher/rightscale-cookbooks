@@ -1,5 +1,10 @@
 rs_utils_marker :begin
 
+#TODO
+#temporary fix. RightScale takes default password from metadata.rb!!!
+node.set[:magento][:db][:password] = "magentouser"
+node.set[:magento][:admin][:password] = "admin123"
+
 if node.has_key?("ec2")
   server_fqdn = node.ec2.public_hostname
 else
@@ -126,6 +131,26 @@ log "5--------------------------------------------------------------------------
     cwd node[:magento][:dir]
     code <<-EOH
 rm -f app/etc/local.xml
+echo php -f install.php -- \
+--license_agreement_accepted "yes" \
+--locale "en_US" \
+--timezone "America/Los_Angeles" \
+--default_currency "USD" \
+--db_host "#{db_host}" \
+--db_name "#{node[:magento][:db][:database]}" \
+--db_user "#{node[:magento][:db][:username]}" \
+--db_pass "#{node[:magento][:db][:password]}" \
+--url "http://#{server_fqdn}/" \
+--skip_url_validation \
+--use_rewrites "yes" \
+--use_secure "yes" \
+--secure_base_url "https://#{server_fqdn}/" \
+--use_secure_admin "yes" \
+--admin_firstname "Admin" \
+--admin_lastname "Admin" \
+--admin_email "#{admin_email}" \
+--admin_username "#{node[:magento][:admin][:user]}" \
+--admin_password "#{node[:magento][:admin][:password]}"
 php -f install.php -- \
 --license_agreement_accepted "yes" \
 --locale "en_US" \
@@ -161,13 +186,13 @@ cookbook_file "/var/www/index.php" do
   group "www-data"
 end
 
-template "#{node[:magento][:dir]}/app/etc/local.xml" do      
-  source "local.xml.erb"                                           
-  mode "0600"                                                      
-  owner "root"
-  group "root"
-  variables(:database => node[:magento][:db])
-end
+#template "#{node[:magento][:dir]}/app/etc/local.xml" do      
+#  source "local.xml.erb"                                           
+#  mode "0600"                                                      
+#  owner "root"
+#  group "root"
+#  variables(:database => node[:magento][:db])
+#end
 log "7--------------------------------------------------------------------------------------------------------"
 
 rs_utils_marker :end

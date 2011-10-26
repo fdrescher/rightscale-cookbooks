@@ -18,7 +18,7 @@ default[:magento][:server][:static_domains] = Array.new
 ::Chef::Node.send(:include, Opscode::OpenSSL::Password)
 
 #modified for RightScale
-set_unless[:magento][:db][:password] = "magentouser"
-set_unless[:magento][:admin][:password] = "admin"
+default[:magento][:db][:password] = "magentouser"
+default[:magento][:admin][:password] = "admin"
 #set_unless[:magento][:db][:password] = secure_password
 #set_unless[:magento][:admin][:password] = secure_password
