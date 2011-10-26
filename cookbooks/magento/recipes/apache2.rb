@@ -1,5 +1,5 @@
 #modified for RightScale
-include_recipe %w{magento apache2 apache2::mod_deflate apache2::mod_expires apache2::mod_headers apache2::mod_rewrite apache2::mod_ssl apache2::mod_php5}
+include_recipe %w{magento}
 #include_recipe %w{magento apache2 apache2::mod_deflate apache2::mod_expires apache2::mod_headers apache2::mod_rewrite apache2::mod_ssl apache2::mod_php5}
 
 if node.has_key?("ec2")

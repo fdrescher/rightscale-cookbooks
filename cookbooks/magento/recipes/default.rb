@@ -76,10 +76,8 @@ EOH
 #    command "./pear install magento-core/Mage_All_Latest-#{node[:magento][:version]}"
 #  end
 
-db_host = node[:magento][:db][:host]
 db_host = "10.211.65.175"
-server_fqdn = "ec2-50-17-84-33.compute-1.amazonaws.com"
-server_fqdn = "dududu.ec2-50-17-84-33.compute-1.amazonaws.com"
+server_fqdn = ""
 
 r = rs_utils_server_collection 'load_balancer' do
   tags [
@@ -100,13 +98,22 @@ else
     [RightScale::Utils::Helper.get_tag_value('server:public_ip_0', tags), tags]
   end.to_hash
 
+  server_ip = nil
+
   # setup create templates
   next_servers.each do |name, tags|
     log "====================================================================================================="
+    server_ip = name
     log name
     log tags
     log "====================================================================================================="
   end
+
+  log server_ip
+
+  Socket.do_not_reverse_lookup = false
+  s = Socket.getaddrinfo(server_ip,nil)
+  server_fqdn = s[0][2]
 end
 
 
