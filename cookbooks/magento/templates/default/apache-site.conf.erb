@@ -3,8 +3,8 @@
   ServerName <% if node[:magento][:server][:secure_domain] %><%= node[:magento][:server][:secure_domain] %><% else %><%= @params[:server_name] %><% end %>
 
   SSLEngine on
-  SSLCertificateKeyFile ssl/<%= @params[:server_name] %>.pem
-  SSLCertificateFile ssl/<%= @params[:server_name] %>.pem
+  SSLCertificateKeyFile <%= node[:apache][:dir] %>/ssl/<%= @params[:server_name] %>.pem
+  SSLCertificateFile <%= node[:apache][:dir] %>/ssl/<%= @params[:server_name] %>.pem
   SSLProtocol all
   SSLCipherSuite ALL:!ADH:RC4+RSA:+HIGH:+MEDIUM:+LOW:+SSLv2:+EXP:+eNULL
 <% else %>

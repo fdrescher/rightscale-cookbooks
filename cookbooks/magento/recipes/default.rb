@@ -27,7 +27,9 @@ cookbook_file "/etc/php5/cli/php.ini" do
   group "root"
 end
 
+log "1--------------------------------------------------------------------------------------------------------"
 unless File.exists?("#{node[:magento][:dir]}/installed.flag")
+log "2--------------------------------------------------------------------------------------------------------"
 
   remote_file "#{Chef::Config[:file_cache_path]}/magento-downloader.tar.gz" do
     checksum node[:magento][:downloader][:checksum]
@@ -58,6 +60,7 @@ chmod -R o+w media var
 rm -rf magento/ magento-1.5.1.0.tar.gz
 EOH
   end
+log "3--------------------------------------------------------------------------------------------------------"
 
 
 #  execute "untar-magento" do
@@ -78,6 +81,7 @@ EOH
 
 db_host = "10.211.65.175"
 server_fqdn = ""
+log "4--------------------------------------------------------------------------------------------------------"
 
 r = rs_utils_server_collection 'load_balancer' do
   tags [
@@ -116,6 +120,7 @@ else
   server_fqdn = s[0][2]
 end
 
+log "5--------------------------------------------------------------------------------------------------------"
 
   bash "magento-install-site" do
     cwd node[:magento][:dir]
@@ -146,6 +151,8 @@ EOH
   end
 end
   
+log "6--------------------------------------------------------------------------------------------------------"
+
 #This file contains a fix for the SSL Proxy in front
 cookbook_file "/var/www/index.php" do
   source "index.php"
@@ -161,5 +168,6 @@ template "#{node[:magento][:dir]}/app/etc/local.xml" do
   group "root"
   variables(:database => node[:magento][:db])
 end
+log "7--------------------------------------------------------------------------------------------------------"
 
 rs_utils_marker :end
