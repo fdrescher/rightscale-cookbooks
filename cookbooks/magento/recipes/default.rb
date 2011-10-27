@@ -90,8 +90,7 @@ log "4--------------------------------------------------------------------------
 
 r = rs_utils_server_collection 'load_balancer' do
   tags [
-    "loadbalancer:lb=mylistener",
-    "loadbalancer:role=master"
+    "loadbalancer:lb=mylistener"
   ]
   secondary_tags "server:public_ip_0=*"
   action :nothing
