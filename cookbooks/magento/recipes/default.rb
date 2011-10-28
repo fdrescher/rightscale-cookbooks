@@ -5,6 +5,72 @@ rs_utils_marker :begin
 node.set[:magento][:db][:password] = "magentouser"
 node.set[:magento][:admin][:password] = "admin123"
 
+node.set[:magento][:db][:database] = "magentodb"
+node.set[:magento][:db][:username] = "magentouser"
+
+r = gem_package "mysql" do
+action :nothing
+end
+r.run_action(:install)
+
+
+db_host = "10.214.27.127"
+
+remote_recipe "initialize database" do
+  recipe "magento::mysql"
+  attributes :magento => {
+		:db => {
+		        :database => node[:magento][:db][:database],
+		        :password => node[:magento][:db][:password],
+		        :username => node[:magento][:db][:username]
+		}
+              }
+  recipients_tags "database:active=true"
+end
+
+package "libmysqlclient-dev"
+package "libmysqlclient16"
+gem_package "mysql"
+require 'rubygems'
+Gem.clear_paths
+require 'mysql'
+
+ruby_block "check for remote recipe excution to finish" do
+  block do
+     database_available = false
+     timeout = 60 # 5 minutes timeout
+     timer = 0
+     until database_available or timer > timeout
+	     begin
+#		m = Mysql.new("#{db_host}", "#{node[:magento][:db][:username]}", "dudi")
+		m = Mysql.new("#{db_host}", "#{node[:magento][:db][:username]}", "#{node[:magento][:db][:password]}")
+		Chef::Log.info "============================================================================================"
+		Chef::Log.info m.list_dbs
+		Chef::Log.info "===============================l============================================================="
+		database_available = true
+	    rescue Mysql::Error => e
+		Chef::Log.error "============================================================================================"
+		Chef::Log.error "Unable to connect to database: " + e
+	#	Chef::Log.error e
+	#	Chef::Log.error e.class().toString
+		Chef::Log.error "============================================================================================"
+		sleep 5;
+		timer += 5
+	    end
+     end
+     raise "Database not available. Abort Magento installation." if !database_available
+  end
+  action :create
+end
+
+ruby_block "test" do
+  block do
+	Chef::Log.info "222============================================================================================"
+  end
+  action :create
+end
+
+
 if node.has_key?("ec2")
   server_fqdn = node.ec2.public_hostname
 else
@@ -84,7 +150,6 @@ log "3--------------------------------------------------------------------------
 #    command "./pear install magento-core/Mage_All_Latest-#{node[:magento][:version]}"
 #  end
 
-db_host = "10.211.65.175"
 server_fqdn = ""
 log "4--------------------------------------------------------------------------------------------------------"
 
