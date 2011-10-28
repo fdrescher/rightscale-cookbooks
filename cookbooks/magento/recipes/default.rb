@@ -8,10 +8,21 @@ node.set[:magento][:admin][:password] = "admin123"
 node.set[:magento][:db][:database] = "magentodb"
 node.set[:magento][:db][:username] = "magentouser"
 
-r = gem_package "mysql" do
-action :nothing
+
+p = package "libmysqlclient-dev" do
+  action :nothing
 end
-r.run_action(:install)
+p.run_action(:install)
+
+p = package "libmysqlclient16" do
+  action :nothing
+end
+p.run_action(:install)
+
+p = gem_package "mysql" do
+  action :nothing
+end
+p.run_action(:install)
 
 
 db_host = "10.214.27.127"
@@ -28,9 +39,6 @@ remote_recipe "initialize database" do
   recipients_tags "database:active=true"
 end
 
-package "libmysqlclient-dev"
-package "libmysqlclient16"
-gem_package "mysql"
 require 'rubygems'
 Gem.clear_paths
 require 'mysql'
@@ -38,7 +46,7 @@ require 'mysql'
 ruby_block "check for remote recipe excution to finish" do
   block do
      database_available = false
-     timeout = 60 # 5 minutes timeout
+     timeout = 600 # 10 minutes timeout
      timer = 0
      until database_available or timer > timeout
 	     begin
