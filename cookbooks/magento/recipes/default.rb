@@ -25,7 +25,7 @@ end
 p.run_action(:install)
 
 
-db_host = "10.214.27.127"
+db_host = ""
 
 remote_recipe "initialize database" do
   recipe "magento::mysql"
@@ -38,6 +38,44 @@ remote_recipe "initialize database" do
               }
   recipients_tags "database:active=true"
 end
+
+
+
+r = rs_utils_server_collection 'database' do
+  tags [
+    "database:active=true"
+  ]
+  secondary_tags "server:private_ip_0=*"
+  action :nothing
+end
+# get the tags in the compile phase
+r.run_action(:load)
+
+if node[:server_collection]['database'].empty?
+  raise "No database found."
+else
+  # 
+  next_servers = node[:server_collection]['database'].to_hash.values.map do |tags|
+    [RightScale::Utils::Helper.get_tag_value('server:private_ip_0', tags), tags]
+  end.to_hash
+
+  server_ip = nil
+
+  # setup create templates
+  next_servers.each do |name, tags|
+    log "====================================================================================================="
+    server_ip = name
+    log name
+    log tags
+    log "====================================================================================================="
+  end
+
+  log server_ip
+
+  db_host = server_ip
+end
+
+
 
 require 'rubygems'
 Gem.clear_paths
@@ -58,7 +96,7 @@ ruby_block "check for remote recipe excution to finish" do
 		database_available = true
 	    rescue Mysql::Error => e
 		Chef::Log.error "============================================================================================"
-		Chef::Log.error "Unable to connect to database: " + e
+		Chef::Log.error "Unable to connect to database: " + e + ". Retrying: (" + timer.to_s + "s/" + timeout.to_s + "s)"
 	#	Chef::Log.error e
 	#	Chef::Log.error e.class().toString
 		Chef::Log.error "============================================================================================"
