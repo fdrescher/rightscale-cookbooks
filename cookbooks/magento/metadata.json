@@ -60,7 +60,6 @@
       "choice": [
 
       ],
-      "default": "",
       "type": "string",
       "recipes": [
 
@@ -153,12 +152,11 @@
       "description": "Magento will connect to MySQL using this user."
     },
     "magento/admin/password": {
-      "required": "optional",
+      "required": "required",
       "calculated": false,
       "choice": [
 
       ],
-      "default": "admin123",
       "type": "string",
       "recipes": [
 
