@@ -7,5 +7,5 @@ default[:magento][:db][:username] = "magentouser"
 default[:magento][:db][:password] = "magentouser"
 default[:magento][:admin][:email] = "webmaster@localhost"
 default[:magento][:admin][:user] = "admin"
-default[:magento][:admin][:password] = "admin"
+default[:magento][:admin][:password] = "admin123" # Important: Magento has some restrictions on the password (length, numbers)
 
