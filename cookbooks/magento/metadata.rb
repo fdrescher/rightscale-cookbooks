@@ -21,19 +21,22 @@ attribute "magento/binaries/url",
   :display_name => "Magento binaries URL",
   :description => "URL to magento binaries.",
   :required => false,
-  :default => "http://www.magentocommerce.com/downloads/assets/1.5.1.0/magento-1.5.1.0.tar.gz"
+  :default => "http://www.magentocommerce.com/downloads/assets/1.5.1.0/magento-1.5.1.0.tar.gz",
+  :recipes => [ "magento::default" ]
 
 attribute "magento/examples/url",
   :display_name => "Magento example URL",
   :description => "URL to magento examples.",
   :required => false,
-  :default => "http://www.magentocommerce.com/downloads/assets/1.1.2/magento-sample-data-1.1.2.tar.gz"
+  :default => "http://www.magentocommerce.com/downloads/assets/1.1.2/magento-sample-data-1.1.2.tar.gz",
+  :recipes => [ "magento::example-install" ]
 
 attribute "magento/dir",
   :display_name => "Magento installation directory",
   :description => "Location to place magento files.",
   :required => false,
-  :default => "/var/www"
+  :default => "/var/www",
+  :recipes => [ "magento::default", "magento::example-install" ]
 
 attribute "magento/db/database",
   :display_name => "Magento MySQL database",
@@ -56,18 +59,22 @@ attribute "magento/admin/email",
   :display_name => "Magento Admin email",
   :description => "Email address of the Magento Administrator.",
   :required => false,
-  :default => "webmaster@localhost"
+  :default => "webmaster@localhost",
+  :recipes => [ "magento::default" ]
 
 attribute "magento/admin/user",
   :display_name => "Magento Admin user",
   :description => "User to access Magento Administration panel.",
   :required => false,
-  :default => "admin"
+  :default => "admin",
+  :recipes => [ "magento::default" ]
+
 
 attribute "magento/admin/password",
   :display_name => "Magento Admin password",
   :description => "Password for the Magento Administration.",
-  :required => true
+  :required => true,
+  :recipes => [ "magento::default" ]
 
 #TEST
 attribute "magento/test/test",
