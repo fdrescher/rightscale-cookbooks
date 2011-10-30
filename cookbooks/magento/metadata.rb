@@ -50,8 +50,7 @@ attribute "magento/db/user",
 attribute "magento/db/password",
   :display_name => "Magento MySQL password",
   :description => "Password for the Magento MySQL user.",
-  :required => true,
-  :default => ""
+  :required => true
 
 attribute "magento/admin/email",
   :display_name => "Magento Admin email",
@@ -68,8 +67,7 @@ attribute "magento/admin/user",
 attribute "magento/admin/password",
   :display_name => "Magento Admin password",
   :description => "Password for the Magento Administration.",
-  :required => false,
-  :default => "admin123"
+  :required => true
 
 #TEST
 attribute "magento/test/test",
