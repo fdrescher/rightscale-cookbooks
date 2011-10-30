@@ -1,4 +1,4 @@
-default[:magento][:binaries][:url] = "http://www.magentocommerce.com/downloads/assets/1.3.2.1/magento-downloader-1.3.2.1.tar.gz"
+default[:magento][:binaries][:url] = "http://www.magentocommerce.com/downloads/assets/1.5.1.0/magento-1.5.1.0.tar.gz"
 default[:magento][:examples][:url] = "http://www.magentocommerce.com/downloads/assets/1.1.2/magento-sample-data-1.1.2.tar.gz"
 default[:magento][:dir] = "/var/www"
 default[:magento][:db][:host] = "localhost"

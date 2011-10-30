@@ -11,7 +11,7 @@ end
 
 # Download examples
 remote_file "#{Chef::Config[:file_cache_path]}/tmp/magento-sample-data.tar.gz" do
-  source [:magento][:examples][:url]
+  source node[:magento][:examples][:url]
   mode "0644"
 end
 
@@ -53,8 +53,10 @@ else
   database_servers = node[:server_collection]['database'].to_hash.values.map do |tags|
     RightScale::Utils::Helper.get_tag_value('server:private_ip_0', tags)
   end
+
   if database_servers.length() > 1
     raise "More than one database found."
+  end
   db_host = database_servers.first()
 end
 
