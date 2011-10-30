@@ -1,3 +1,5 @@
+rs_utils_marker :begin
+
 #include_recipe "mysql::server"
 
 require 'rubygems'
@@ -21,7 +23,7 @@ template "/etc/mage-grants.sql" do
 end
 
 execute "" do
-  command "echo \"remote recipe excetion\""
+  command "echo \"remote recipe execution\""
   not_if node[:remote_recipe].nil?  
   notifies :run, resources(:execute => "mysql-install-mage-privileges"), :delayed
 end
@@ -56,3 +58,5 @@ end
 #  end
 #  action :create
 #end
+
+rs_utils_marker :end

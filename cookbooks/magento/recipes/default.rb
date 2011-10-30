@@ -24,6 +24,7 @@ p = gem_package "mysql" do
 end
 p.run_action(:install)
 
+package "mysql-client"
 
 db_host = ""
 
