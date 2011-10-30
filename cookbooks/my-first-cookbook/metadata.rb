@@ -13,7 +13,7 @@ attribute "name",
 :required => true,
 :recipes => [ "my-first-cookbook::hello" ]
 
-attribute "second_name",
+attribute "id",
 :display_name => "Another test value",
 :description => "Test specifying Input via Chef attribute",
 :required => true,
