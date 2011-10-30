@@ -27,7 +27,7 @@
   "version": "0.0.0",
   "attributes": {
     "magento/dir": {
-      "required": "required",
+      "required": "optional",
       "calculated": false,
       "choice": [
 
@@ -41,7 +41,7 @@
       "description": "Location to place magento files."
     },
     "magento/examples/url": {
-      "required": "required",
+      "required": "optional",
       "calculated": false,
       "choice": [
 
@@ -60,7 +60,7 @@
       "choice": [
 
       ],
-      "default": "magentouser",
+      "default": "",
       "type": "string",
       "recipes": [
 
@@ -69,7 +69,7 @@
       "description": "Password for the Magento MySQL user."
     },
     "magento/db/database": {
-      "required": "required",
+      "required": "optional",
       "calculated": false,
       "choice": [
 
@@ -125,7 +125,7 @@
       "description": "User to access Magento Administration panel."
     },
     "magento/binaries/url": {
-      "required": "required",
+      "required": "optional",
       "calculated": false,
       "choice": [
 
@@ -139,7 +139,7 @@
       "description": "URL to magento binaries."
     },
     "magento/db/user": {
-      "required": "required",
+      "required": "optional",
       "calculated": false,
       "choice": [
 

@@ -20,38 +20,38 @@ depends "rs_utils"
 attribute "magento/binaries/url",
   :display_name => "Magento binaries URL",
   :description => "URL to magento binaries.",
-  :required => true,
+  :required => false,
   :default => "http://www.magentocommerce.com/downloads/assets/1.5.1.0/magento-1.5.1.0.tar.gz"
 
 attribute "magento/examples/url",
   :display_name => "Magento example URL",
   :description => "URL to magento examples.",
-  :required => true,
+  :required => false,
   :default => "http://www.magentocommerce.com/downloads/assets/1.1.2/magento-sample-data-1.1.2.tar.gz"
 
 attribute "magento/dir",
   :display_name => "Magento installation directory",
   :description => "Location to place magento files.",
-  :required => true,
+  :required => false,
   :default => "/var/www"
 
 attribute "magento/db/database",
   :display_name => "Magento MySQL database",
   :description => "Magento will use this MySQL database to store its data.",
-  :required => true,
+  :required => false,
   :default => "magentodb"
 
 attribute "magento/db/user",
   :display_name => "Magento MySQL user",
   :description => "Magento will connect to MySQL using this user.",
-  :required => true,
+  :required => false,
   :default => "magentouser"
 
 attribute "magento/db/password",
   :display_name => "Magento MySQL password",
   :description => "Password for the Magento MySQL user.",
   :required => true,
-  :default => "magentouser"
+  :default => ""
 
 attribute "magento/admin/email",
   :display_name => "Magento Admin email",
