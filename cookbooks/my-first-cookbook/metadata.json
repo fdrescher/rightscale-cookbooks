@@ -12,6 +12,19 @@
       ],
       "display_name": "Test value",
       "description": "Test specifying Input via Chef attribute"
+    },
+    "id": {
+      "required": "required",
+      "calculated": false,
+      "choice": [
+
+      ],
+      "type": "string",
+      "recipes": [
+        "my-first-cookbook::hello"
+      ],
+      "display_name": "Another test value",
+      "description": "Test specifying Input via Chef attribute"
     }
   },
   "recipes": {
