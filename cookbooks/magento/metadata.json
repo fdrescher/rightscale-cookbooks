@@ -19,6 +19,7 @@
     "magento::mysql": "Create mysql database for magento",
     "magento::nginx": "Install nginx webserver for magento",
     "magento::apache2": "Install apache2 webserver for magento",
+    "magento::example-install": "Installs Magento example database and web-assets",
     "magento": "Install magento"
   },
   "recommendations": {

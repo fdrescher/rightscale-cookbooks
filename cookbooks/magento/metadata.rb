@@ -9,6 +9,8 @@ recipe           "magento::mysql", "Create mysql database for magento"
 recipe           "magento::sample_data", "Pre-populate magento with sample data"
 recipe           "magento::apache2", "Install apache2 webserver for magento"
 recipe           "magento::nginx", "Install nginx webserver for magento"
+recipe           "magento::example-install", "Installs Magento example database and web-assets"
+
 
 %w{ debian ubuntu }.each do |os|
   supports os
