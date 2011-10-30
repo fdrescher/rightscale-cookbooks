@@ -1,23 +1,8 @@
-<% if @params[:ssl] %>
-<VirtualHost <%= node[:ipaddress] %>:443>
-  ServerName <% if node[:magento][:server][:secure_domain] %><%= node[:magento][:server][:secure_domain] %><% else %><%= @params[:server_name] %><% end %>
-
-  SSLEngine on
-  SSLCertificateKeyFile <%= node[:apache][:dir] %>/ssl/<%= @params[:server_name] %>.pem
-  SSLCertificateFile <%= node[:apache][:dir] %>/ssl/<%= @params[:server_name] %>.pem
-  SSLProtocol all
-  SSLCipherSuite ALL:!ADH:RC4+RSA:+HIGH:+MEDIUM:+LOW:+SSLv2:+EXP:+eNULL
-<% else %>
 <VirtualHost *:8000>
-  ServerName <%= @params[:server_name] %>
-  ServerAlias <% @params[:server_aliases].each do |a| %><%= "#{a}" %> <% end %>
-<% end %>
-
   DocumentRoot <%= @params[:docroot] %>
 
   <Directory <%= @params[:docroot] %>>
     AllowOverride All
-    <% if @params[:ssl] %>SSLRequire %{SSL_CIPHER_USEKEYSIZE} >= 128<% end %>
   </Directory>
 
   <Directory />

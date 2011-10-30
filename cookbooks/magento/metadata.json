@@ -7,11 +7,11 @@
 
     ]
   },
-  "maintainer": "Yevgeniy Viktorov",
-  "description": "Installing magento stack",
+  "maintainer": "Your Name",
+  "description": "A fabulous new cookbook",
   "replacing": {
   },
-  "maintainer_email": "wik@rentasite.com.ua",
+  "maintainer_email": "youremail@example.com",
   "groupings": {
   },
   "recipes": {
@@ -19,11 +19,12 @@
     "magento::mysql": "Create mysql database for magento",
     "magento::nginx": "Install nginx webserver for magento",
     "magento::apache2": "Install apache2 webserver for magento",
+    "magento::example-install": "Installs Magento example database and web-assets",
     "magento": "Install magento"
   },
   "recommendations": {
   },
-  "version": "0.3.1",
+  "version": "0.0.0",
   "attributes": {
     "magento/dir": {
       "required": "optional",
@@ -31,21 +32,35 @@
       "choice": [
 
       ],
-      "default": "/var/www/magento",
+      "default": "/var/www",
       "type": "string",
       "recipes": [
-
+        "magento::default",
+        "magento::example-install"
       ],
       "display_name": "Magento installation directory",
       "description": "Location to place magento files."
     },
-    "magento/db/password": {
+    "magento/examples/url": {
       "required": "optional",
       "calculated": false,
       "choice": [
 
       ],
-      "default": "randomly generated",
+      "default": "http://www.magentocommerce.com/downloads/assets/1.1.2/magento-sample-data-1.1.2.tar.gz",
+      "type": "string",
+      "recipes": [
+        "magento::example-install"
+      ],
+      "display_name": "Magento example URL",
+      "description": "URL to magento examples."
+    },
+    "magento/db/password": {
+      "required": "required",
+      "calculated": false,
+      "choice": [
+
+      ],
       "type": "string",
       "recipes": [
 
@@ -67,20 +82,6 @@
       "display_name": "Magento MySQL database",
       "description": "Magento will use this MySQL database to store its data."
     },
-    "magento/server/aliases": {
-      "required": "optional",
-      "calculated": false,
-      "choice": [
-
-      ],
-      "default": "",
-      "type": "string",
-      "recipes": [
-
-      ],
-      "display_name": "Magento domain aliases",
-      "description": "Domain aliases magento can be serverd on"
-    },
     "magento/admin/email": {
       "required": "optional",
       "calculated": false,
@@ -90,38 +91,10 @@
       "default": "webmaster@localhost",
       "type": "string",
       "recipes": [
-
+        "magento::default"
       ],
       "display_name": "Magento Admin email",
       "description": "Email address of the Magento Administrator."
-    },
-    "magento/downloader/url": {
-      "required": "optional",
-      "calculated": false,
-      "choice": [
-
-      ],
-      "default": "http://www.magentocommerce.com/downloads/assets/1.3.2.1/magento-downloader-1.3.2.1.tar.gz",
-      "type": "string",
-      "recipes": [
-
-      ],
-      "display_name": "Magento downloader URL",
-      "description": "URL to magento downloader."
-    },
-    "magento/version": {
-      "required": "optional",
-      "calculated": false,
-      "choice": [
-
-      ],
-      "default": "stable",
-      "type": "string",
-      "recipes": [
-
-      ],
-      "display_name": "Magento download version",
-      "description": "Version of Magento to download from the Magento site."
     },
     "magento/test/test": {
       "required": "optional",
@@ -146,10 +119,24 @@
       "default": "admin",
       "type": "string",
       "recipes": [
-
+        "magento::default"
       ],
       "display_name": "Magento Admin user",
       "description": "User to access Magento Administration panel."
+    },
+    "magento/binaries/url": {
+      "required": "optional",
+      "calculated": false,
+      "choice": [
+
+      ],
+      "default": "http://www.magentocommerce.com/downloads/assets/1.5.1.0/magento-1.5.1.0.tar.gz",
+      "type": "string",
+      "recipes": [
+        "magento::default"
+      ],
+      "display_name": "Magento binaries URL",
+      "description": "URL to magento binaries."
     },
     "magento/db/user": {
       "required": "optional",
@@ -165,58 +152,15 @@
       "display_name": "Magento MySQL user",
       "description": "Magento will connect to MySQL using this user."
     },
-    "magento/server/secure_domain": {
-      "required": "optional",
-      "calculated": false,
-      "choice": [
-
-      ],
-      "default": "",
-      "type": "string",
-      "recipes": [
-
-      ],
-      "display_name": "Magento secure domain",
-      "description": "Domain to serve magento over SSL"
-    },
-    "magento/server/static_domains": {
-      "required": "optional",
-      "calculated": false,
-      "choice": [
-
-      ],
-      "default": "",
-      "type": "string",
-      "recipes": [
-
-      ],
-      "display_name": "Magento static domains",
-      "description": "Domains can be used to server static files"
-    },
-    "magento/downloader/checksum": {
-      "required": "optional",
-      "calculated": false,
-      "choice": [
-
-      ],
-      "default": "91ccdebf0403f0c328cb728b4cd19504",
-      "type": "string",
-      "recipes": [
-
-      ],
-      "display_name": "Magento downloader tarball checksum",
-      "description": "Checksum of the tarball for the magento downloader."
-    },
     "magento/admin/password": {
-      "required": "optional",
+      "required": "required",
       "calculated": false,
       "choice": [
 
       ],
-      "default": "randomly generated",
       "type": "string",
       "recipes": [
-
+        "magento::default"
       ],
       "display_name": "Magento Admin password",
       "description": "Password for the Magento Administration."
@@ -224,15 +168,12 @@
   },
   "suggestions": {
   },
-  "license": "Apache 2.0",
+  "license": "Apache v2.0",
   "conflicting": {
   },
   "name": "magento",
   "dependencies": {
     "mysql": [
-
-    ],
-    "openssl": [
 
     ],
     "rs_tools": [
@@ -245,7 +186,7 @@
 
     ]
   },
-  "long_description": "= DESCRIPTION:\n\nInstalls and configures Magento http://www.magentocommerce.com/ ecommerce platform. Also contains recipes to setup apache2 or nginx webserver backend, mysql database and sample data.\n\n= REQUIREMENTS:\n\n== Platform:\n\nTested with apache backend on Ubuntu 10.04 and Debian 5.0 (Lenny).\nAnd nginx + php-fpm backend on Debian 5.0 (Lenny) only.\n\n== Cookbooks:\n\nOpscode cookbooks, http://github.com/opscode/cookbooks/tree/master:\n\n* php\n* apache2\n* nginx\n* mysql\n* openssl\n\nFor a greather performance consider to give a try the following cookbooks:\n\n* php-fpm, http://github.com/yviktorov/cookbook-php-fpm\n* eaccelerator, http://github.com/yviktorov/cookbook_eaccelerator\n\nAlso available thru http://cookbooks.opscode.com/\n\n== Libraries:\n\nThe openssl library is required from the openssl cookbook to generate secure passwords.\n\n= ATTRIBUTES:\n\n* magento[:dir] - Set the location to place magento files. Default is /var/www/magento.\n* magento[:db][:database] - Magento will use this MySQL database to store its data.\n* magento[:db][:username] - Magento will connect to MySQL using this user.\n* magento[:db][:password] - Password for the Magento MySQL user. The default is a randomly generated string.\n* magento[:admin][:email] - Email address for the Magento Admin Panel user.\n* magento[:admin][:user] - Username/login for Magento Admin Panel user.\n* magento[:admin][:user] - Passwrod for the Magento Admin Panel user. The default is a randomly generated string.\n\nThe random generation is handled with the secure_password method in the openssl cookbook which is a cryptographically secure random generator and not predictable like the random method in the ruby standard library.\n\n= USAGE:\n\n\n= LICENSE and AUTHOR:\n\nAuthor:: Yevgeniy A. Viktorov (@yviktorov)\n\nLicensed under the Apache License, Version 2.0 (the \"License\");\nyou may not use this file except in compliance with the License.\nYou may obtain a copy of the License at\n\n    http://www.apache.org/licenses/LICENSE-2.0\n\nUnless required by applicable law or agreed to in writing, software\ndistributed under the License is distributed on an \"AS IS\" BASIS,\nWITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\nSee the License for the specific language governing permissions and\nlimitations under the License.\n",
+  "long_description": "",
   "providing": {
   }
 }
