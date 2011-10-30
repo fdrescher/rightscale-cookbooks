@@ -1,1 +1,1 @@
-log "Hello #{node[:name]} #{node[:second_name]}"
+log "Hello #{node[:name]} #{node[:id]}"
