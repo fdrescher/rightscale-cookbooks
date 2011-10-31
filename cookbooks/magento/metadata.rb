@@ -75,6 +75,7 @@ attribute "magento/admin/password",
   :display_name => "Magento Admin password",
   :description => "Password for the Magento Administration.",
   :required => false,
+  :default => "admin123",
   :recipes => [ "magento::default", "magento::install" ]
 
 attribute "lb_haproxy/applistener_name",

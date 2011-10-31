@@ -171,6 +171,7 @@
       "choice": [
 
       ],
+      "default": "admin123",
       "type": "string",
       "recipes": [
         "magento::default",
