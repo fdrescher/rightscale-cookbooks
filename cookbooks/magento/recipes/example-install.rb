@@ -1,3 +1,5 @@
+## Call this recipe only directly after magento::default has been run!
+
 rs_utils_marker :begin
 
 package "mysql-client"

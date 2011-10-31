@@ -1,4 +1,4 @@
-## This recipe is not intended to be called directly
+## Call this recipe only directly after magento::default has been run!
 
 rs_utils_marker :begin
 
@@ -75,7 +75,6 @@ unless File.exists?("#{node[:magento][:dir]}/installed.flag")
   end
 end
   
-
 # This file contains a fix for the SSL Proxy
 cookbook_file "/var/www/index.php" do
   source "index.php"
