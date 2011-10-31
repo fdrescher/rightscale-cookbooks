@@ -55,11 +55,12 @@
       "description": "URL to magento examples."
     },
     "magento/db/password": {
-      "required": "required",
+      "required": "optional",
       "calculated": false,
       "choice": [
 
       ],
+      "default": "magentouser",
       "type": "string",
       "recipes": [
         "magento::default",

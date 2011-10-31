@@ -53,7 +53,8 @@ attribute "magento/db/username",
 attribute "magento/db/password",
   :display_name => "Magento MySQL password",
   :description => "Password for the Magento MySQL user.",
-  :required => true,
+  :required => false,
+  :default => "magentouser",
   :recipes => [ "magento::default", "magento::install", "magento::example-install", "magento::mysql" ]
 
 attribute "magento/admin/email",
