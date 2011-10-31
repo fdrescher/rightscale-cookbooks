@@ -73,13 +73,6 @@ attribute "magento/admin/user",
 attribute "magento/admin/password",
   :display_name => "Magento Admin password",
   :description => "Password for the Magento Administration.",
-  :required => true,
-  :recipes => [ "magento::default" ]
-
-#TEST
-attribute "magento/test/test",
-  :display_name => "Test attribute",
-  :description => "Test attribute.",
   :required => false,
-  :default => "lalala"
+  :recipes => [ "magento::default" ]
 

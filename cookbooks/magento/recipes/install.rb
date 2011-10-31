@@ -33,13 +33,14 @@ unless File.exists?("#{node[:magento][:dir]}/installed.flag")
     EOH
   end
 
+  include_recipe "magento::get-load-balancer-fqdn" ##returns: server_fqdn
+  include_recipe "magento::get-database-host"      ##returns: db_host
+
   if "webmaster@localhost" == node[:magento][:admin][:email]
-    admin_email = "webmaster@#{server_fqdn}"
+    admin_email = "webmaster@#{node[:tmp][:server_fqdn]}"
   else
     admin_email = node[:magento][:admin][:email]
   end
-
-  include_recipe "magento::get-load-balancer-fqdn" ##returns: server_fqdn
 
   bash "magento-install-site" do
     cwd node[:magento][:dir]
@@ -50,15 +51,15 @@ unless File.exists?("#{node[:magento][:dir]}/installed.flag")
     --locale "en_US" \
     --timezone "America/Los_Angeles" \
     --default_currency "USD" \
-    --db_host "#{db_host}" \
+    --db_host "#{node[:tmp][:db_host]}" \
     --db_name "#{node[:magento][:db][:database]}" \
     --db_user "#{node[:magento][:db][:username]}" \
     --db_pass "#{node[:magento][:db][:password]}" \
-    --url "http://#{server_fqdn}/" \
+    --url "http://#{node[:tmp][:server_fqdn]}/" \
     --skip_url_validation \
     --use_rewrites "yes" \
     --use_secure "yes" \
-    --secure_base_url "https://#{server_fqdn}/" \
+    --secure_base_url "https://#{node[:tmp][:server_fqdn]}/" \
     --use_secure_admin "yes" \
     --admin_firstname "Admin" \
     --admin_lastname "Admin" \

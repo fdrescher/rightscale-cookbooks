@@ -4,6 +4,7 @@
 
 rs_utils_marker :begin
 
+
 r = server_collection 'load_balancer' do
   tags [
     "loadbalancer:lb=#{node[:lb_haproxy][:applistener_name]}"
@@ -30,7 +31,7 @@ else
 
   Socket.do_not_reverse_lookup = false
   s = Socket.getaddrinfo(lb_host,nil)
-  server_fqdn = s[0][2]
+  node.set[:tmp][:server_fqdn] = s[0][2]
 end
 
 rs_utils_marker :end
